@@ -1,0 +1,39 @@
+name: NodeJS with Webpack
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+        cache: 'npm'
+
+    - name: Run install
+      uses: borales/actions-yarn@v4
+      with:
+          cmd: install # will run `yarn install` command
+
+    - name: Build production bundle
+      uses: borales/actions-yarn@v4
+      with:
+          cmd: build # will run `yarn build` command
+#          cmd: build:prod # will run `yarn build:prod` command
+
+    - name: Deploy WEB to remote server
+      uses: kostya-ten/ssh-server-deploy@v4
+      with:
+          host: ${{ secrets.HOST }}
+          port: 22
+          username: ${{ secrets.USERNAME }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+          scp_source: dist/*
+          scp_target: /var/www/html

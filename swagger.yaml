@@ -1,0 +1,1525 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://77.246.159.166:8080
+    description: Generated server url
+paths:
+  /api/v1/crm/user:
+    get:
+      tags:
+        - user-controller
+      operationId: getUser
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/UserDto"
+    put:
+      tags:
+        - user-controller
+      operationId: updateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/UserDto"
+    post:
+      tags:
+        - user-controller
+      operationId: addUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCreateDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/UserDto"
+  /api/v1/crm/trade/{id}/next:
+    put:
+      tags:
+        - trade-controller
+      operationId: nextStep
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidListTradeFieldDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/TradeDto"
+  /api/v1/crm/trade/{id}/last:
+    put:
+      tags:
+        - trade-controller
+      operationId: lastStep
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidListTradeFieldDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/TradeDto"
+  /api/v1/crm/trade/move/{from}/{to}:
+    put:
+      tags:
+        - trade-controller
+      operationId: updateTradeStep
+      parameters:
+        - name: from
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: to
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: No Content
+  /api/v1/crm/client:
+    put:
+      tags:
+        - client-controller
+      operationId: updateClient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ClientDto"
+    post:
+      tags:
+        - client-controller
+      operationId: addClient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientDto"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ClientDto"
+  /api/v1/crm/channel:
+    put:
+      tags:
+        - channel-controller
+      operationId: updateChannel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChannelInputDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ChannelDto"
+    post:
+      tags:
+        - channel-controller
+      operationId: addChannel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChannelInputDto"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ChannelDto"
+  /api/v1/crm/channel/category:
+    get:
+      tags:
+        - channel-controller
+      operationId: getCategories
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChannelCategoryDto"
+    put:
+      tags:
+        - channel-controller
+      operationId: updateCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChannelCategoryDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ChannelCategoryDto"
+    post:
+      tags:
+        - channel-controller
+      operationId: addCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChannelCategoryDto"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ChannelCategoryDto"
+  /api/v1/crm/user/changePassword:
+    post:
+      tags:
+        - user-controller
+      operationId: changePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangePasswordDto"
+        required: true
+      responses:
+        "204":
+          description: No Content
+  /api/v1/crm/user/all:
+    post:
+      tags:
+        - user-controller
+      operationId: getUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserPageSettings"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PageDto"
+  /api/v1/crm/trade/{id}/create:
+    post:
+      tags:
+        - trade-controller
+      operationId: createClientTrade
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "201":
+          description: Created
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/TradeDto"
+  /api/v1/crm/trade/steps:
+    get:
+      tags:
+        - trade-controller
+      operationId: getStep
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TradeStepDto"
+    post:
+      tags:
+        - trade-controller
+      operationId: updateSteps
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidListTradeStepDto"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TradeStepDto"
+  /api/v1/crm/trade/steps/client/{id}/trades:
+    post:
+      tags:
+        - trade-controller
+      operationId: getClientTrades
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PageSettings"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/TradePageDto"
+  /api/v1/crm/trade/step/{id}/trades:
+    post:
+      tags:
+        - trade-controller
+      operationId: getStepTrades
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PageSettings"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PageDto"
+  /api/v1/crm/trade/step/{id}/fields:
+    get:
+      tags:
+        - trade-controller
+      operationId: getStepFields
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TradeStepFieldDto"
+    post:
+      tags:
+        - trade-controller
+      operationId: updateStepFields
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidListTradeStepFieldDto"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TradeStepFieldDto"
+  /api/v1/crm/client/{id}/request:
+    get:
+      tags:
+        - client-controller
+      operationId: getIncomingRequest
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "201":
+          description: Created
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IncomingRequestDto"
+    post:
+      tags:
+        - client-controller
+      operationId: addIncomingRequest
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncomingRequestDto"
+        required: true
+      responses:
+        "201":
+          description: Created
+  /api/v1/crm/client/all:
+    post:
+      tags:
+        - client-controller
+      operationId: getClients
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientPageSettings"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PageDto"
+  /api/v1/crm/channel/all:
+    post:
+      tags:
+        - channel-controller
+      operationId: getChannels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChannelPageSettings"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/PageDto"
+  /api/auth/login:
+    post:
+      tags:
+        - auth-controller
+      operationId: authenticateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequestDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+  /api/v1/crm/user/{id}:
+    get:
+      tags:
+        - user-controller
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/UserDto"
+  /api/v1/crm/user/roles:
+    get:
+      tags:
+        - user-controller
+      operationId: getUserRoles
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  type: string
+                  enum:
+                    - ADMIN
+                    - OPERATOR
+                    - MANAGER
+  /api/v1/crm/client/{id}:
+    get:
+      tags:
+        - client-controller
+      operationId: getClientById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ClientDto"
+  /api/v1/crm/channel/{id}:
+    get:
+      tags:
+        - channel-controller
+      operationId: getChannel
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ChannelDto"
+    delete:
+      tags:
+        - channel-controller
+      operationId: deleteChannel
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: No Content
+  /api/v1/crm/channel/url/shortening:
+    get:
+      tags:
+        - channel-controller
+      operationId: shorteningUrl
+      parameters:
+        - name: url
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+  /api/v1/crm/channel/stat:
+    get:
+      tags:
+        - channel-controller
+      operationId: getChannelStat
+      parameters:
+        - name: link
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ChannelStatDto"
+  /api/v1/crm/channel/stack:
+    get:
+      tags:
+        - channel-controller
+      operationId: getTechStack
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  type: string
+  /api/v1/crm/channel/solution:
+    get:
+      tags:
+        - channel-controller
+      operationId: getSolutions
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+  /api/v1/crm/channel/info:
+    get:
+      tags:
+        - channel-controller
+      operationId: getChannelInfo
+      parameters:
+        - name: link
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ChannelInfoDto"
+  /api/auth/refreshtoken:
+    get:
+      tags:
+        - auth-controller
+      operationId: refreshAndGetAuthenticationToken
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+  /api/auth/logout:
+    get:
+      tags:
+        - auth-controller
+      operationId: logoutUser
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: object
+  /api/v1/crm/channel/category/{id}:
+    delete:
+      tags:
+        - channel-controller
+      operationId: deleteCategory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: No Content
+components:
+  schemas:
+    UserDto:
+      required:
+        - firstName
+        - lastName
+        - locked
+        - roles
+        - userName
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userName:
+          maxLength: 50
+          minLength: 6
+          type: string
+        firstName:
+          maxLength: 50
+          minLength: 3
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 3
+          type: string
+        middleName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        birthDate:
+          type: string
+          format: date-time
+        locked:
+          type: boolean
+        roles:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+              - ADMIN
+              - OPERATOR
+              - MANAGER
+        creationDate:
+          type: string
+          format: date-time
+        creator:
+          $ref: "#/components/schemas/UserShortDto"
+    UserShortDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleName:
+          type: string
+    TradeFieldDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        stepField:
+          $ref: "#/components/schemas/TradeStepFieldDto"
+        value:
+          type: string
+    TradeStepFieldDto:
+      required:
+        - fieldType
+        - name
+        - required
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          maxLength: 100
+          minLength: 5
+          type: string
+        fieldType:
+          type: string
+          enum:
+            - STRING
+            - CHECK_BOX
+            - LIST
+        required:
+          type: boolean
+        values:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    ValidListTradeFieldDto:
+      type: array
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/TradeFieldDto"
+        empty:
+          type: boolean
+      items:
+        $ref: "#/components/schemas/TradeFieldDto"
+    ClientMessengerDto:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - TELEGRAM
+            - VIBER
+            - WHATSAPP
+        nickname:
+          type: string
+    ClientShortDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleName:
+          type: string
+        phones:
+          type: array
+          items:
+            type: string
+        messengers:
+          type: array
+          items:
+            $ref: "#/components/schemas/ClientMessengerDto"
+        email:
+          type: string
+    TradeDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        identity:
+          type: string
+          format: uuid
+        site:
+          type: boolean
+        creationDate:
+          type: string
+          format: date-time
+        finishedDate:
+          type: string
+          format: date-time
+        step:
+          $ref: "#/components/schemas/TradeStepShortDto"
+        client:
+          $ref: "#/components/schemas/ClientShortDto"
+        fields:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/TradeFieldDto"
+    TradeStepShortDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        started:
+          type: boolean
+        name:
+          type: string
+    ClientDto:
+      required:
+        - email
+        - firstName
+        - lastName
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        firstName:
+          maxLength: 50
+          minLength: 3
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 3
+          type: string
+        middleName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        phones:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        messengers:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/ClientMessengerDto"
+        email:
+          maxLength: 50
+          minLength: 6
+          type: string
+        preferCommunicationMethods:
+          maxLength: 250
+          minLength: 0
+          type: string
+        age:
+          maximum: 100
+          minimum: 10
+          type: integer
+          format: int32
+        sex:
+          pattern: М|Ж
+          type: string
+        noteAboutClient:
+          maxLength: 250
+          minLength: 0
+          type: string
+        internalClickId:
+          maxLength: 250
+          minLength: 0
+          type: string
+        creator:
+          $ref: "#/components/schemas/UserShortDto"
+        creationDate:
+          type: string
+          format: date-time
+    ChannelCategoryDto:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          maxLength: 100
+          minLength: 0
+          type: string
+        description:
+          maxLength: 1000
+          minLength: 0
+          type: string
+    ChannelInputDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        channelId:
+          type: integer
+          format: int64
+        link:
+          maxLength: 100
+          minLength: 0
+          type: string
+        channelUser:
+          $ref: "#/components/schemas/ChannelUserDto"
+        category:
+          $ref: "#/components/schemas/ChannelCategoryDto"
+        techStack:
+          type: string
+          enum:
+            - Java
+            - Python
+        participantsCount:
+          type: integer
+          format: int64
+        ic:
+          type: integer
+          format: int64
+        irr:
+          type: integer
+          format: int64
+        connected:
+          type: integer
+          format: int64
+        price:
+          type: number
+          format: double
+        personPrice:
+          type: number
+          format: double
+        comment:
+          maxLength: 2000
+          minLength: 0
+          type: string
+        utmUrl:
+          maxLength: 500
+          minLength: 0
+          type: string
+        shortUrl:
+          maxLength: 100
+          minLength: 0
+          type: string
+        startedDate:
+          type: string
+          format: date-time
+        registration:
+          type: integer
+          format: int64
+        registrationPrice:
+          type: number
+          format: double
+        solution:
+          type: string
+          enum:
+            - PLACEMENT
+            - REJECTION
+        paymentMethod:
+          maxLength: 100
+          minLength: 0
+          type: string
+        redLabel:
+          type: boolean
+        blackLabel:
+          type: boolean
+        greenLabel:
+          type: boolean
+        estimated:
+          type: integer
+          format: int32
+    ChannelUserDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        channelId:
+          type: integer
+          format: int64
+        username:
+          maxLength: 100
+          minLength: 0
+          type: string
+        title:
+          maxLength: 100
+          minLength: 0
+          type: string
+        about:
+          maxLength: 2000
+          minLength: 0
+          type: string
+    ChannelDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        channelId:
+          type: integer
+          format: int64
+        link:
+          type: string
+        channelUser:
+          $ref: "#/components/schemas/ChannelUserDto"
+        category:
+          $ref: "#/components/schemas/ChannelCategoryDto"
+        techStack:
+          type: string
+          enum:
+            - Java
+            - Python
+        participantsCount:
+          type: integer
+          format: int64
+        ic:
+          type: integer
+          format: int64
+        irr:
+          type: integer
+          format: int64
+        connected:
+          type: integer
+          format: int64
+        price:
+          type: number
+          format: double
+        personPrice:
+          type: number
+          format: double
+        comment:
+          type: string
+        utmUrl:
+          type: string
+        shortUrl:
+          type: string
+        startedDate:
+          type: string
+          format: date-time
+        registration:
+          type: integer
+          format: int64
+        registrationPrice:
+          type: number
+          format: double
+        solution:
+          type: string
+          enum:
+            - PLACEMENT
+            - REJECTION
+        paymentMethod:
+          maxLength: 100
+          minLength: 0
+          type: string
+        redLabel:
+          type: boolean
+        blackLabel:
+          type: boolean
+        greenLabel:
+          type: boolean
+        estimated:
+          type: integer
+          format: int32
+        modChanelInfo:
+          $ref: "#/components/schemas/ModChanelInfoDto"
+        creator:
+          $ref: "#/components/schemas/UserShortDto"
+        creationDate:
+          type: string
+          format: date-time
+    ModChanelInfoDto:
+      type: object
+      properties:
+        ic:
+          type: number
+          format: double
+        personPrice:
+          type: number
+          format: double
+    UserCreateDto:
+      required:
+        - firstName
+        - lastName
+        - locked
+        - password
+        - roles
+        - userName
+      type: object
+      properties:
+        userName:
+          maxLength: 50
+          minLength: 6
+          type: string
+        firstName:
+          maxLength: 50
+          minLength: 3
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 3
+          type: string
+        middleName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        birthDate:
+          type: string
+          format: date-time
+        locked:
+          type: boolean
+        roles:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+              - ADMIN
+              - OPERATOR
+              - MANAGER
+        password:
+          pattern: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$
+          type: string
+    ChangePasswordDto:
+      required:
+        - newPassword
+        - oldPassword
+      type: object
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          pattern: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$
+          type: string
+    UserPageSettings:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        direction:
+          type: string
+          enum:
+            - ASC
+            - DESC
+        key:
+          type: string
+        userName:
+          type: string
+        firstName:
+          type: string
+    PageDto:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            type: object
+    TradeStepDto:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        started:
+          type: boolean
+        name:
+          maxLength: 100
+          minLength: 5
+          type: string
+        stepFields:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: "#/components/schemas/TradeStepFieldDto"
+    ValidListTradeStepDto:
+      type: array
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/TradeStepDto"
+        empty:
+          type: boolean
+      items:
+        $ref: "#/components/schemas/TradeStepDto"
+    PageSettings:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        direction:
+          type: string
+          enum:
+            - ASC
+            - DESC
+        key:
+          type: string
+    TradePageDto:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        groupItems:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: "#/components/schemas/TradeDto"
+    ValidListTradeStepFieldDto:
+      type: array
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/TradeStepFieldDto"
+        empty:
+          type: boolean
+      items:
+        $ref: "#/components/schemas/TradeStepFieldDto"
+    IncomingRequestDto:
+      required:
+        - siteClientId
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        siteClientId:
+          type: string
+        utmSource:
+          type: string
+        utmMedium:
+          type: string
+        utmCampaign:
+          type: string
+        utmCampaignId:
+          type: integer
+          format: int32
+        utmContent:
+          type: string
+        utmContentId:
+          type: integer
+          format: int32
+        utmTerm:
+          type: string
+        utmTermId:
+          type: integer
+          format: int32
+        fbclid:
+          type: string
+        yclid:
+          type: string
+        yclidFirstVisitDate:
+          type: string
+          format: date-time
+        ymclid:
+          type: string
+        glickid:
+          type: string
+        glickidFirstVisitDate:
+          type: string
+          format: date-time
+        pageTitle:
+          type: string
+        dateTime:
+          type: string
+          format: date-time
+        userAgent:
+          type: string
+        eventSourceUrl:
+          type: string
+        fbc:
+          type: string
+        fbp:
+          type: string
+        rbClickid:
+          type: string
+        internalClickId:
+          type: string
+        client:
+          $ref: "#/components/schemas/ClientDto"
+        incomingRequestType:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        creationDate:
+          type: string
+          format: date-time
+    ClientPageSettings:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        direction:
+          type: string
+          enum:
+            - ASC
+            - DESC
+        key:
+          type: string
+        firstName:
+          type: string
+        phone:
+          type: string
+        messenger:
+          type: string
+        email:
+          type: string
+    ChannelPageSettings:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        direction:
+          type: string
+          enum:
+            - ASC
+            - DESC
+        key:
+          type: string
+        link:
+          type: string
+        techStack:
+          type: string
+          enum:
+            - Java
+            - Python
+        channelUser:
+          type: string
+        creatorFirstName:
+          type: string
+    LoginRequestDto:
+      required:
+        - password
+        - userName
+      type: object
+      properties:
+        userName:
+          type: string
+        password:
+          type: string
+    ChannelResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        username:
+          type: string
+        participantsCount:
+          type: integer
+          format: int64
+        avgPostReach:
+          type: integer
+          format: int64
+        avgPostReach12h:
+          type: integer
+          format: int64
+        avgPostReach48h:
+          type: integer
+          format: int64
+        errPercent:
+          type: number
+          format: double
+        dailyReach:
+          type: integer
+          format: int64
+        ciIndex:
+          type: number
+          format: double
+        mentionsCunt:
+          type: integer
+          format: int64
+        forwardsCount:
+          type: integer
+          format: int64
+        mentioningChannelsCount:
+          type: integer
+          format: int64
+    ChannelStatDto:
+      type: object
+      properties:
+        error:
+          type: string
+        status:
+          type: string
+          enum:
+            - OK
+            - ERROR
+        response:
+          $ref: "#/components/schemas/ChannelResponse"
+    ChannelInfoDto:
+      type: object
+      properties:
+        error:
+          type: string
+        status:
+          type: string
+          enum:
+            - OK
+            - ERROR
+        response:
+          $ref: "#/components/schemas/ChannelResponse"

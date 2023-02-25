@@ -1,0 +1,52 @@
+{
+  "name": "vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "husky": "husky install"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@hookform/resolvers": "^2.9.10",
+    "@material-ui/pickers": "^3.3.10",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.13",
+    "@mui/x-date-pickers": "^5.0.12",
+    "@tanstack/react-query-devtools": "^4.20.4",
+    "axios": "^1.2.0",
+    "dayjs": "^1.11.7",
+    "depcheck": "^1.4.3",
+    "i18next": "^22.0.4",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "notistack": "^2.0.8",
+    "orval": "^6.10.3",
+    "prettier": "^2.7.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.39.4",
+    "react-hot-toast": "^2.4.0",
+    "react-i18next": "^12.0.0",
+    "react-query": "^3.39.2",
+    "react-router-dom": "^6.4.3",
+    "sass": "^1.56.1",
+    "simplebar-react": "^2.4.3",
+    "use-debounce": "^9.0.2",
+    "vite-plugin-svgr": "^2.4.0",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.190",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "@vitejs/plugin-react": "^2.2.0",
+    "husky": "^8.0.2",
+    "pretty-quick": "^3.1.3",
+    "typescript": "^4.6.4",
+    "vite": "^3.2.3"
+  }
+}
